@@ -1,0 +1,93 @@
+# Python & uv project .gitignore
+# Keep lockfiles (e.g. uv.lock, poetry.lock, Pipfile.lock) committed — do not ignore them.
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+*.pyd
+*.dll
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+wheelhouse/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+cover/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Virtual environments
+.env/
+.venv/
+venv/
+env/
+ENV/
+venv.bak/
+venv*/
+
+# pyenv
+.python-version
+
+# IDEs and editors
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter
+.ipynb_checkpoints
+
+# Static analysis caches
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Local environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# macOS/Windows
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Visual Studio
+.vs/
+
+# Sphinx docs build
+docs/_build/
+
+# Misc editor/temp files
+*~
+*.swp
+
+# uv tool workspace/cache (optional) — ignore if present
+.uv/
+
