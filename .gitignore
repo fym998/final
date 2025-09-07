@@ -50,9 +50,6 @@ ENV/
 venv.bak/
 venv*/
 
-# pyenv
-.python-version
-
 # IDEs and editors
 .idea/
 *.sublime-project
