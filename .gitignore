@@ -88,3 +88,4 @@ docs/_build/
 # uv tool workspace/cache (optional) — ignore if present
 .uv/
 
+.direnv/
