@@ -138,6 +138,7 @@ name = "final"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "ipaddress" },
     { name = "openai" },
     { name = "py7zr" },
     { name = "tqdm" },
@@ -145,6 +146,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "ipaddress", specifier = ">=1.0.23" },
     { name = "openai", specifier = ">=1.107.0" },
     { name = "py7zr", specifier = ">=1.0.0" },
     { name = "tqdm", specifier = ">=4.67.1" },
@@ -212,6 +214,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/11/69/9e78965c491d7a389e002fc02af8863b62e5a376e8ebbd60543cfcf17808/inflate64-1.0.3-cp313-cp313-win32.whl", hash = "sha256:61a24f463e6dac38ddf2d4c011a54247f86cf676e869797de0e344ef7a4be456", size = 32971, upload-time = "2025-06-01T04:43:01.435Z" },
     { url = "https://files.pythonhosted.org/packages/dd/9d/21c2baa41ac3aa762bcbb66a7a9f00b7857489fe7531a2e7d35df262da94/inflate64-1.0.3-cp313-cp313-win_amd64.whl", hash = "sha256:5b077eaf7d6e99823751bd30e450102419cd71b6db4b3765e752e843fc040906", size = 35753, upload-time = "2025-06-01T04:43:02.65Z" },
     { url = "https://files.pythonhosted.org/packages/74/62/14784f5b15f31a3dff1d954e14891ab8942cd3a7e88649705a00d23a4c36/inflate64-1.0.3-cp313-cp313-win_arm64.whl", hash = "sha256:abc83da55d66d8e8cf1a782d5870f1aab4f2380d489af8c15825ee003645a974", size = 33211, upload-time = "2025-06-01T04:43:03.852Z" },
+]
+
+[[package]]
+name = "ipaddress"
+version = "1.0.23"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b9/9a/3e9da40ea28b8210dd6504d3fe9fe7e013b62bf45902b458d1cdc3c34ed9/ipaddress-1.0.23.tar.gz", hash = "sha256:b7f8e0369580bb4a24d5ba1d7cc29660a4a6987763faf1d8a8046830e020e7e2", size = 32958, upload-time = "2019-10-18T01:30:24.58Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c2/f8/49697181b1651d8347d24c095ce46c7346c37335ddc7d255833e7cde674d/ipaddress-1.0.23-py2.py3-none-any.whl", hash = "sha256:6e0f4a39e66cb5bb9a137b00276a2eff74f93b71dcbdad6f10ff7df9d3557fcc", size = 18159, upload-time = "2019-10-18T01:30:27.002Z" },
 ]
 
 [[package]]
