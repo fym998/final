@@ -426,7 +426,9 @@ def main(input_dir, output_dir=""):
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     print(f"\n✅ 敏感信息已提取完成，保存为: {output_file}")
-    print("下一步可运行 step3_ai_filter.py 进行 AI 清洗和车企关联过滤")
+    # print("下一步可运行 step3_ai_filter.py 进行 AI 清洗和车企关联过滤")
+
+    return results
 
 
 if __name__ == "__main__":
