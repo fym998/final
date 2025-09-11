@@ -77,9 +77,7 @@ if __name__ == "__main__":
 
     output_dir = args.dir
     input_file = args.file
-
-    input_data = json.load(open(input_file, "r", encoding="utf-8"))
     main(
-        input_data,
+        input_file,
         output_dir,
     )
