@@ -25,7 +25,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 uv run 文件.py
 ```
 
-运行任务一整全流程：
+运行任务一全流程：
 ```shell
 uv run task1/main.py
 ```
