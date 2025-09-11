@@ -9,7 +9,7 @@ from os import path
 def write_csv_table(output_path: str, table: list[dict], headers: list[str]):
     """将数据写入CSV文件"""
     with open(output_path, mode="w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=headers)
+        writer = csv.DictWriter(file, fieldnames=headers, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(table)
 
