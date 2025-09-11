@@ -43,10 +43,10 @@ usage: main.py [-h] -f FILE [-o OUTPUT] [--skip-step1] [--skip-step2] [--skip-st
 options:
   -h, --help           show this help message and exit
   -f, --file FILE      输入的固件压缩包路径
-  -o, --output OUTPUT  分析结果的输出目录路径 (可选，默认为output）
-  --skip-step1         跳过step 1
-  --skip-step2         跳过step 2
-  --skip-step3         跳过step 3
+  -o, --output OUTPUT  分析结果的输出目录路径 （可选，默认为output）
+  --skip-step1         跳过 step 1
+  --skip-step2         跳过 step 2
+  --skip-step3         跳过 step 3
 ```
 
 ### 安装 pip 包
