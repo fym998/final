@@ -43,10 +43,11 @@ def write_certificate_table(certificates: list[dict], output_dir: str):
 
 
 def main(
-    input: dict,
+    input_file: str,
     output_dir: str,
 ):
     """将各表格写入CSV文件"""
+    input = json.load(open(input_file, "r", encoding="utf-8"))
     ips = input.get("ips", [])
     domains = input.get("domains", [])
     buckets = input.get("buckets", [])
