@@ -407,7 +407,7 @@ def process_directory(root_dir):
 # -------------------------
 
 
-def main(input_dir, output_dir=""):
+def main(input_dir, output_path="step2_output.json"):
     if not os.path.exists(input_dir):
         print(f"错误: 目录不存在: {input_dir}")
         sys.exit(1)
@@ -421,7 +421,7 @@ def main(input_dir, output_dir=""):
         print(f"  {k}: {len(v)} 项")
 
     # 保存为中间 JSON 文件（供 step3 使用）
-    output_file = os.path.join(output_dir, "step2_output.json")
+    output_file = output_path
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
