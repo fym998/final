@@ -7,6 +7,13 @@ import step1
 import step2
 import step3
 
+
+def main(input_file: str, automaker: str, output_path: str = ""):
+    step1.main(input_file, output_path)
+    step2_result = step2.main(output_path, output_path)
+    step3.main(step2_result, automaker, output_path)
+
+
 if __name__ == "__main__":
     # 使用 argparse 创建一个漂亮的命令行帮助界面
     parser = argparse.ArgumentParser(description="固件分析工具")
@@ -21,7 +28,4 @@ if __name__ == "__main__":
     input_file = args.file
     output_path = args.output
 
-    # 依次调用三个步骤的 main 函数
-    step1.main(input_file, output_path)
-    step2_result = step2.main(output_path, output_path)
-    step3.main(step2_result, automaker, output_path)
+    main(input_file, automaker, output_path)
