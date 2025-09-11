@@ -25,6 +25,11 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 uv run 文件.py
 ```
 
+运行任务一整全流程：
+```shell
+uv run task1/main.py
+```
+
 ### 安装 pip 包
 
 uv 配置文件已经换源，无需再换
