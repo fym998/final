@@ -30,14 +30,14 @@ def write_domain_table(domains: list[dict], output_dir: str):
 
 def write_bucket_table(buckets: list[dict], output_dir: str):
     """将存储桶信息写入CSV文件"""
-    headers = ["bucket", "source_file"]
+    headers = ["provider", "secret", "source"]
     output_path = path.join(output_dir, "buckets.csv")
     write_csv_table(output_path, buckets, headers)
 
 
 def write_certificate_table(certificates: list[dict], output_dir: str):
     """将证书信息写入CSV文件"""
-    headers = ["content", "source_file"]
+    headers = ["content", "source"]
     output_path = path.join(output_dir, "certificates.csv")
     write_csv_table(output_path, certificates, headers)
 
@@ -51,7 +51,7 @@ def main(
     ips = input.get("ips", [])
     domains = input.get("domains", [])
     buckets = input.get("buckets", [])
-    certificates = input.get("certificates", [])
+    certificates = input.get("cert_keys", [])
     write_ip_table(ips, output_dir)
     write_domain_table(domains, output_dir)
     write_bucket_table(buckets, output_dir)
