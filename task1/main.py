@@ -20,7 +20,10 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--file", required=True, help="输入的固件压缩包路径")
     parser.add_argument("-a", "--automaker", required=True, help="车企名称")
     parser.add_argument(
-        "-o", "--output", help="分析结果的输出目录路径 (可选，默认为当前目录)"
+        "-o",
+        "--output",
+        default="output",
+        help="分析结果的输出目录路径 (可选，默认为output）",
     )
     args = parser.parse_args()
 
