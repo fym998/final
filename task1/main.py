@@ -9,7 +9,7 @@ import step3
 
 
 def main(input_file: str, automaker: str, output_path: str = ""):
-    step1.main(input_file, output_path)
+    step1.main(input_file, output_path if output_path != "" else None)
     step2_result = step2.main(output_path, output_path)
     step3.main(step2_result, automaker, output_path)
 
