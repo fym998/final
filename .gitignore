@@ -90,6 +90,9 @@ docs/_build/
 
 .direnv/
 
+# output
+output/
+
 # misc
 *.csv
 *.zip
