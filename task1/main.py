@@ -15,17 +15,18 @@ def main(
     output_dir: str = "",
     skip_step1: bool = False,
     skip_step2: bool = False,
+    skip_step3: bool = False,
 ):
     if not skip_step1:
         step1.main(input_file, output_dir if output_dir != "" else None)
-    # Only run step2 when not skipped. step2 writes step2_output.json which step3 reads.
     if not skip_step2:
         step2.main(output_dir, path.join(output_dir, "step2_output.json"))
-    step3_result = step3.main(
-        path.join(output_dir, "step2_output.json"),
-        path.join(output_dir, "step3_output.json"),
-    )
-    to_csv.main(step3_result, output_dir)
+    if not skip_step3:
+        step3.main(
+            path.join(output_dir, "step2_output.json"),
+            path.join(output_dir, "step3_output.json"),
+        )
+    to_csv.main(path.join(output_dir, "step3_output.json"), output_dir)
 
 
 if __name__ == "__main__":
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--skip-step1", action="store_true", help="跳过step 1")
     parser.add_argument("--skip-step2", action="store_true", help="跳过step 2")
+    parser.add_argument("--skip-step3", action="store_true", help="跳过step 3")
     args = parser.parse_args()
 
     # Enforce: to skip step2, user must also skip step1
@@ -48,9 +50,16 @@ if __name__ == "__main__":
             "--skip-step2 requires --skip-step1 (要跳过 step 2，必须同时跳过 step 1)"
         )
 
+    # Enforce: to skip step3, user must also skip step1 and step2
+    if args.skip_step3 and not args.skip_step2:
+        parser.error(
+            "--skip-step3 requires --skip-step2 (要跳过 step 3，必须同时跳过 step 2)"
+        )
+
     input_file = args.file
     output_dir = args.output
     skip_step1 = args.skip_step1
     skip_step2 = args.skip_step2
+    skip_step3 = args.skip_step3
 
-    main(input_file, output_dir, skip_step1, skip_step2)
+    main(input_file, output_dir, skip_step1, skip_step2, skip_step3)
