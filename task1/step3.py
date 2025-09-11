@@ -626,21 +626,9 @@ def process_cert_keys(cert_key_list):
     return processed_cert_keys
 
 
-def main(input_file, output_file, whois_api_key="", disable_online=False):
+def main(input, output_file, whois_api_key="", disable_online=False):
     global WHOIS_API_KEY
     WHOIS_API_KEY = whois_api_key
-
-    # 读取输入文件
-    if not os.path.exists(input_file):
-        print(f"错误: 输入文件 {input_file} 不存在")
-        return
-
-    try:
-        with open(input_file, "r", encoding="utf-8") as f:
-            input_data = json.load(f)
-    except Exception as e:
-        print(f"读取输入文件时出错: {e}")
-        return
 
     # 如果禁用在线查询，使用默认值
     if disable_online:
@@ -711,5 +699,19 @@ if __name__ == "__main__":
 
     # 设置全局WHOIS API密钥
     WHOIS_API_KEY = args.whois_api_key
+    input_file = args.input
+    output_file = args.output
 
-    main(args.input, args.output, WHOIS_API_KEY, args.disable_online)
+    # 读取输入文件
+    if not os.path.exists(input_file):
+        print(f"错误: 输入文件 {input_file} 不存在")
+        exit(1)
+
+    try:
+        with open(input_file, "r", encoding="utf-8") as f:
+            input_data = json.load(f)
+    except Exception as e:
+        print(f"读取输入文件时出错: {e}")
+        exit(1)
+
+    main(input_data, output_file, WHOIS_API_KEY, args.disable_online)
