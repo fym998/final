@@ -148,7 +148,7 @@ def extract_sensitive_from_text(content, source_path):
     return findings
 
 
-def process_apk_file(apk_path, rel_source, counter):
+def process_apk_file(apk_path, rel_source, counter, keys_output_dir):
     """处理单个 APK 文件"""
     findings = {"ips": [], "domains": [], "secrets": [], "cert_keys": []}
 
@@ -168,23 +168,18 @@ def process_apk_file(apk_path, rel_source, counter):
                 source_identifier = f"{rel_source} -> {decompiled_rel_path}"
 
                 if file.suffix.lower() == ".key":
-                    # 格式: <原始APK文件名>_<反编译后相对路径中的文件名>.key
-                    # 例如: app-release_lib_arm64-v8a_libnative-lib.key
-                    apk_stem = Path(
-                        rel_source
-                    ).stem  # 获取 APK 文件名（不含路径和.apk后缀）
+                    apk_stem = Path(rel_source).stem
                     key_file_name = f"{apk_stem}_{decompiled_rel_path.name}"
                     safe_key_file_name = "".join(
                         c if c.isalnum() or c in ("_", "-", ".") else "_"
                         for c in key_file_name
                     )
-                    output_key_file = (
-                        Path.cwd() / safe_key_file_name
-                    )  # Path.cwd() 获取当前工作目录
-                    # 读取并保存 .key 文件的完整二进制内容
+
+                    # 【修改】使用传入的目录作为保存位置
+                    output_key_file = keys_output_dir / safe_key_file_name
+
                     with open(file, "rb") as src_f:
                         key_content = src_f.read()
-
                     with open(output_key_file, "wb") as dst_f:
                         dst_f.write(key_content)
 
@@ -223,7 +218,7 @@ def process_apk_file(apk_path, rel_source, counter):
 # -------------------------
 
 
-def process_directory(root_dir):
+def process_directory(root_dir, keys_output_dir):
     """遍历目录并处理所有文件"""
     root = Path(root_dir)
     all_findings = {"ips": [], "domains": [], "secrets": [], "cert_keys": []}
@@ -244,7 +239,10 @@ def process_directory(root_dir):
 
             try:
                 if subdir_name == "apk_files" and file_path.suffix.lower() == ".apk":
-                    apk_findings = process_apk_file(file_path, rel_source, counter)
+                    # 【修改】将 keys_output_dir 传递下去
+                    apk_findings = process_apk_file(
+                        file_path, rel_source, counter, keys_output_dir
+                    )
                     for key in apk_findings:
                         all_findings[key].extend(apk_findings[key])
                     print(
@@ -307,8 +305,15 @@ def main(input_dir, output_path="step2_output.json"):
         print(f"错误: 目录不存在: {input_dir}")
         sys.exit(1)
 
+    output_dir = Path(output_path).parent
+    keys_output_dir = output_dir / "extracted_keys"
+    keys_output_dir.mkdir(parents=True, exist_ok=True)
+    print(f"提取出的 .key 文件将被保存在: {keys_output_dir.resolve()}")
+
     print(f"开始第二步处理：从 {input_dir} 提取敏感信息...")
-    results = process_directory(input_dir)
+
+    # 【修改】将新创建的目录路径传递给 process_directory
+    results = process_directory(input_dir, keys_output_dir)
 
     # 输出统计
     print("\n[提取完成] 结果统计:")
@@ -328,8 +333,14 @@ def main(input_dir, output_path="step2_output.json"):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("用法: python extract.py <解压后的根目录路径>")
+        print("用法: python step2.py <解压后的根目录路径>")
         sys.exit(1)
 
     input_dir = sys.argv[1]
-    main(input_dir)
+
+    # 【修改】让输出文件和密钥目录都基于当前工作目录
+    main_output_dir = Path.cwd() / "step2_results"
+    main_output_dir.mkdir(parents=True, exist_ok=True)
+    json_output_path = main_output_dir / "step2_output.json"
+
+    main(input_dir, str(json_output_path))
