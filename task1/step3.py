@@ -626,7 +626,7 @@ def process_cert_keys(cert_key_list):
     return processed_cert_keys
 
 
-def main(input, output_file, whois_api_key="", disable_online=False):
+def main(input_data, output_file, whois_api_key="", disable_online=False):
     global WHOIS_API_KEY
     WHOIS_API_KEY = whois_api_key
 
@@ -666,9 +666,9 @@ def main(input, output_file, whois_api_key="", disable_online=False):
 
     # 保存输出文件
     try:
-        with open(args.output, "w", encoding="utf-8") as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             json.dump(output_data, f, ensure_ascii=False, indent=2)
-        print(f"处理完成! 结果已保存到 {args.output}")
+        print(f"处理完成! 结果已保存到 {output_file}")
 
         # 输出统计信息
         print(f"发现公网IP地址数量: {len(processed_ips)}")
