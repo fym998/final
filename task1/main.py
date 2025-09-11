@@ -13,8 +13,11 @@ import to_csv
 def main(input_file: str, output_dir: str = "", skip_step1: bool = False):
     if not skip_step1:
         step1.main(input_file, output_dir if output_dir != "" else None)
-    step2_result = step2.main(output_dir, path.join(output_dir, "step2_output.json"))
-    step3_result = step3.main(step2_result, path.join(output_dir, "step3_output.json"))
+    step2.main(output_dir, path.join(output_dir, "step2_output.json"))
+    step3_result = step3.main(
+        path.join(output_dir, "step2_output.json"),
+        path.join(output_dir, "step3_output.json"),
+    )
     to_csv.main(step3_result, output_dir)
 
 
