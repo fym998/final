@@ -30,6 +30,24 @@ uv run 文件.py
 uv run task1/main.py
 ```
 
+任务一帮助文档：
+```shell
+uv run task1/main.py --help
+```
+
+```
+usage: main.py [-h] -f FILE [-o OUTPUT] [--skip-step1] [--skip-step2]
+
+固件分析工具
+
+options:
+  -h, --help           show this help message and exit
+  -f, --file FILE      输入的固件压缩包路径
+  -o, --output OUTPUT  分析结果的输出目录路径 (可选，默认为output）
+  --skip-step1         跳过step 1
+  --skip-step2         跳过step 2
+```
+
 ### 安装 pip 包
 
 uv 配置文件已经换源，无需再换
