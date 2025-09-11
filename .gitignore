@@ -89,3 +89,10 @@ docs/_build/
 .uv/
 
 .direnv/
+
+# misc
+*.zip
+*.json
+*.tar
+*.tar.gz
+*.apk
