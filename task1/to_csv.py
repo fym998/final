@@ -28,11 +28,11 @@ def write_domain_table(domains: list[dict], output_dir: str):
     write_csv_table(output_path, domains, headers)
 
 
-def write_bucket_table(buckets: list[dict], output_dir: str):
+def write_secret_table(secrets: list[dict], output_dir: str):
     """将存储桶信息写入CSV文件"""
     headers = ["provider", "secret", "source"]
-    output_path = path.join(output_dir, "buckets.csv")
-    write_csv_table(output_path, buckets, headers)
+    output_path = path.join(output_dir, "secrets.csv")
+    write_csv_table(output_path, secrets, headers)
 
 
 def write_certificate_table(certificates: list[dict], output_dir: str):
@@ -50,11 +50,11 @@ def main(
     input = json.load(open(input_file, "r", encoding="utf-8"))
     ips = input.get("ips", [])
     domains = input.get("domains", [])
-    buckets = input.get("buckets", [])
+    secrets = input.get("secrets", [])
     certificates = input.get("cert_keys", [])
     write_ip_table(ips, output_dir)
     write_domain_table(domains, output_dir)
-    write_bucket_table(buckets, output_dir)
+    write_secret_table(secrets, output_dir)
     write_certificate_table(certificates, output_dir)
     print(f"CSV files have been written to {output_dir}")
 
