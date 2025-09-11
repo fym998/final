@@ -691,6 +691,8 @@ def main(input_file, output_file, whois_api_key="", disable_online=False):
     except Exception as e:
         print(f"保存输出文件时出错: {e}")
 
+    return output_data
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
