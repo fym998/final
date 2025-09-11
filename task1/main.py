@@ -12,7 +12,7 @@ import to_csv
 
 def main(
     input_file: str,
-    output_dir: str = "",
+    output_dir: str,
     skip_step1: bool = False,
     skip_step2: bool = False,
     skip_step3: bool = False,
