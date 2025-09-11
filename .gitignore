@@ -91,6 +91,7 @@ docs/_build/
 .direnv/
 
 # misc
+*.csv
 *.zip
 *.json
 *.tar
