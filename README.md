@@ -36,7 +36,7 @@ uv run task1/main.py --help
 ```
 
 ```
-usage: main.py [-h] -f FILE [-o OUTPUT] [--skip-step1] [--skip-step2]
+usage: main.py [-h] -f FILE [-o OUTPUT] [--skip-step1] [--skip-step2] [--skip-step3]
 
 固件分析工具
 
@@ -46,6 +46,7 @@ options:
   -o, --output OUTPUT  分析结果的输出目录路径 (可选，默认为output）
   --skip-step1         跳过step 1
   --skip-step2         跳过step 2
+  --skip-step3         跳过step 3
 ```
 
 ### 安装 pip 包
