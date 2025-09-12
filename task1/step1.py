@@ -14,6 +14,7 @@ from pathlib import Path  # 用更现代、更简单的方式处理文件路径
 from collections import deque  # 一种特殊的列表，两头都能添加或删除，很适合用作任务队列
 from typing import Dict, List  # 用于给函数参数和返回值添加类型提示，让代码更易读
 from tqdm import tqdm  # 用于创建漂亮的进度条 (需要 pip install tqdm)
+import stat
 
 # -----------------------------------------------------------------------------
 # 全局配置 (常量)
@@ -51,6 +52,24 @@ TEXT_FILE_EXTENSIONS = {
 
 # 定义哪些目录名下的文件被认为是“二进制可执行文件”
 BINARY_DIRECTORIES = {"bin", "sbin"}
+
+
+# -----------------------------------------------------------------------------
+# 一个健壮的错误处理函数
+# -----------------------------------------------------------------------------
+def force_remove_error_handler(func, path, exc_info):
+    """
+    错误处理函数，当 shutil.rmtree 遇到错误时被调用。
+    它会尝试强制修改文件权限并再次删除。
+    """
+    try:
+        # 将文件权限设置为“用户可写”
+        os.chmod(path, stat.S_IWRITE)
+        # 再次尝试调用原始的删除函数 (如 os.unlink)
+        func(path)
+    except Exception as e:
+        # 如果强制修改权限后删除依然失败，就打印警告并跳过，避免程序崩溃
+        logging.warning(f"强制删除失败: {path}, 原因: {e}")
 
 
 # -----------------------------------------------------------------------------
@@ -234,7 +253,7 @@ def classify_and_restructure(
 
     # 步骤3: 所有有用的文件都移走后，整个临时解压目录就可以安全地删除了
     logging.info(f"\n清理临时解压目录及其剩余内容: {root_extraction_path}")
-    shutil.rmtree(root_extraction_path)
+    shutil.rmtree(root_extraction_path, onexc=force_remove_error_handler)
 
     # 返回记录好的原始路径
     return restored_paths
